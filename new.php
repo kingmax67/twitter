@@ -1,0 +1,57 @@
+$(function(){
+
+	$(document).on('click','.like-btn',function(){
+		
+	var user_id=$(this).data('user');
+    var tweet_id=$(this).data('tweet');
+var counter=$(this).find('.likesCounter');
+    var count =counter.text();
+    var button  =$(this);
+    alert(user_id);
+    $.post('http://localhost/twitter/core/ajax/like.php',{like:$tweet_id,user_id:$user_id},function(){
+
+ counter.show;
+  button.addClass('unlike');
+  button.removeClass('like-btn');
+  count++;
+  counter.text(count);
+  button.find('fa-heart-o').addClass('fa-heart');
+    button.find('fa-heart').removeClass('fa-heart-o');
+
+
+
+
+    });
+
+
+	});
+$(document).on('click','.unlike',function(){
+	alert('hi');
+	counter.show;
+	var user_id=$(this).data('user');
+    var tweet_id=$(this).data('tweet');
+        var tweet_id=$(this).data('tweet');
+var counter=$(this).find('.likesCounter');
+    var count =counter.text();
+    var button  =$(this);
+    $.post('http://localhost/twitter/core/ajax/like.php', {unlike:$tweet_id,user_id:$user_id},function(){
+  button.addClass('like-btn');
+  button.removeClass('unlike');
+  count--;
+  if(count===0){
+  	counter.hide();
+  }else{
+  	  counter.text(count);
+  }
+
+  button.find('fa-heart').addClass('fa-heart-o');
+    button.find('fa-heart-o').removeClass('fa-heart');
+
+
+
+
+    });
+
+
+	});
+});
